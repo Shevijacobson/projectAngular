@@ -32,23 +32,23 @@ export class FunTecherService {
       if (teacher.Access == 1) {
         for (let course of this.course.arrCourses) {
           let isExist = false;
-          if (course.IdTeacher == teacher.Id)
-          { 
-             for (let i = 0; i < courses.length && !isExist; i++)
+          if (course.IdTeacher == teacher.Id) {
+            for (let i = 0; i < courses.length && !isExist; i++)
               if (courses[i] == course.Name)
                 isExist = true;
-          if (!isExist)
-            courses.push(course.Name);
-          
+            if (!isExist)
+              courses.push(course.Name);
+
+          }
+
         }
-    
-      }  
         teachersWithTheirCourses.push({ ...teacher, courses: courses });
-    }}
+      }
+    }
     console.log(teachersWithTheirCourses);
     return teachersWithTheirCourses;
-  
-}
+
+  }
 
   //פונקציה שמקבלת אי די מורה ומחזירה את השם שלה
   GetNameTeacher(id_Teacher: string) {
@@ -61,21 +61,18 @@ export class FunTecherService {
     }
     return null
   }
-//פונקציה שמוסיפה מורה
-AddTeacher(newTeacher:Teacher){
+  //פונקציה שמוסיפה מורה
+  AddTeacher(newTeacher: Teacher) {
 
-  for (let teacher of this.teachers.teachers) 
-      {  
-        if(teacher.Id==newTeacher.Id )
-           return 400;
-          if(teacher.Password==newTeacher.Password)
-            return 400;
-      }
-     
-      this.teachers.teachers.push(newTeacher);
-      console.log(  this.course.arrCourses)
-  return 200;
-}
+    for (let teacher of this.teachers.teachers) {
+      if (teacher.Id == newTeacher.Id)
+        return 400;
+    }
 
-  
+    this.teachers.teachers.push(newTeacher);
+    console.log(this.course.arrCourses)
+    return 200;
+  }
+
+
 }
