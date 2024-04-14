@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid" >
+      <a class="navbar-brand" (click)="passComponent(1)">קורסים</a>
+      <a class="navbar-brand" (click)="passComponent(2)">הוספת מורה</a>
+      <a class="navbar-brand" (click)="passComponent(3)">הוספת תלמיד</a>
+      <a class="navbar-brand" (click)="passComponent(4)">דוחות מורות</a>
+      <a class="navbar-brand" (click)="passComponent(5)">דוחות תלמידים</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>

@@ -1,0 +1,153 @@
+<div class="register-form">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+     
+      <div class="form-group">
+            <label> שם פרטי</label>
+           <input
+           type="text"
+          formControlName="firstName"
+          class="form-control" 
+          [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+        />
+        @if (submitted && f['firstName'].errors) {
+        <div class="invalid-feedback">
+          @if (f['firstName'].errors['required']) {
+          <div>firstName is required</div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>שם משפחה</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+        />
+        @if (submitted && f['lastName'].errors) {
+        <div class="invalid-feedback">
+          @if (f['lastName'].errors['required']) {
+          <div>lastName is required</div>
+          } @if (f['lastName'].errors['minlength']) {
+          <div>lastName must be at least 2 characters</div>
+          } @if (f['lastName'].errors['maxlength']) {
+          <div>lastName must not exceed 20 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+
+      
+      <div class="form-group">
+        <label> ת.ז. </label>
+       <input
+       type="text"
+      formControlName="id"
+      class="form-control" 
+      [ngClass]="{ 'is-invalid': submitted && f['id'].errors }"
+    />
+    @if (submitted && f['id'].errors) {
+    <div class="invalid-feedback">
+      @if (f['id'].errors['required']) {
+      <div>id is required</div>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- רק למורה בלבד -->
+      <div class="form-group">
+        <label>שם קורס</label>
+        <input
+          type="text"
+          formControlName="nameCourse"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['nameCourse'].errors }"
+        />
+        @if (submitted && f['nameCourse'].errors) {
+        <div class="invalid-feedback">
+          @if (f['nameCourse'].errors['required']) {
+          <div>courseName is required</div>
+          } @if (f['nameCourse'].errors['nameCourse']) {
+          <div>courseName is invalid</div>
+          }
+        </div>
+        }
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label>סיסמא</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        />
+        @if (submitted && f['password'].errors) {
+        <div class="invalid-feedback">
+          @if (f['password'].errors['required']) {
+          <div>Password is required</div>
+          } @if (f['password'].errors['minlength']) {
+          <div>Password must be at least 6 characters</div>
+          } @if (f['password'].errors['maxlength']) {
+          <div>Password must not exceed 40 characters</div>
+          }
+        </div>
+        }
+      </div>
+  
+      <div class="form-group">
+        <label> אישור סיסמא</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+        />
+        @if (submitted && f['confirmPassword'].errors) {
+        <div class="invalid-feedback">
+          @if (f['confirmPassword'].errors['required']) {
+          <div>Confirm Password is required</div>
+          } @if (f['confirmPassword'].errors['matching']) {
+          <div>Confirm Password does not match</div>
+          }
+        </div>
+        }
+      </div>
+
+  
+      <!-- <div class="form-group form-check">
+        <input
+          type="checkbox"
+          formControlName="acceptTerms"
+          class="form-check-input"
+          [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
+        />
+        <label for="acceptTerms" class="form-check-label"
+          >I have read and agree to the Terms</label
+        >
+        @if (submitted && f['acceptTerms'].errors) {
+        <div class="invalid-feedback">Accept Terms is required</div>
+        }
+      </div> -->
+  
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">שליחה</button>
+        <!-- <button
+          type="button"
+          (click)="onReset()"
+          class="btn btn-warning float-right"
+        >
+          Reset
+        </button> -->
+      </div>
+    </form>
+  </div>
+  
