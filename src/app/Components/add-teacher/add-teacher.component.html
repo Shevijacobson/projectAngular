@@ -116,6 +116,18 @@
         <div class="invalid-feedback">Accept Terms is required</div>
         }
       </div> -->
+
+      
+      <mat-form-field>
+        <mat-label>Toppings</mat-label>
+        <mat-select [formControl]="toppings" multiple>
+          @for (topping of toppingList; track topping) {
+            <mat-option [value]="topping">{{topping}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+
     <br>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">שליחה</button>

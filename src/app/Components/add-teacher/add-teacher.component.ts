@@ -33,6 +33,8 @@ export class AddTeacherComponent {
   form: FormGroup = new FormGroup({});
 
   submitted = false;
+  toppings = new FormControl('');
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
 
   constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService) { }
