@@ -21,6 +21,7 @@ import { Teacher } from '../../Models/Teacher';
 import { FunCourseService } from '../../Services/Functions/fun-course.service';
 import { Course } from '../../Models/Course';
 import { CoursesService } from '../../Services/Courses/courses.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-teacher',
   standalone: true,
@@ -34,7 +35,7 @@ export class AddTeacherComponent {
   submitted = false;
 
 
-  constructor(private funTeacher: FunTecherService,private funCourses: FunCourseService) { }
+  constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup(
@@ -49,7 +50,7 @@ export class AddTeacherComponent {
         password: new FormControl('',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(3),
             Validators.maxLength(40),
           ]),
         confirmPassword: new FormControl('', [Validators.required]),
@@ -79,21 +80,41 @@ export class AddTeacherComponent {
       Password: this.form.value.password,
       Access: 1
     }
-          let newCourse: Course = {
-        Id: "",
-        Name: this.form.value.nameCourse,
-        NumLessons: 0,
-        IdTeacher: this.form.value.id,
-        IdStudent: ""
-      }
+    let newCourse: Course = {
+      Id: "",
+      Name: this.form.value.nameCourse,
+      NumLessons: 0,
+      IdTeacher: this.form.value.id,
+      IdStudent: ""
+    }
     if (this.funTeacher.AddTeacher(newTeacher) == 200) {
-
-      this.funCourses.addCourse(newCourse)
+  
+    if(this.funCourses.addCourse(newCourse)==200)  
+   {   Swal.fire({
+        text: 'המשתמש נוסף בהצלחה',
+        icon: 'success',
+        confirmButtonText: 'אישור'
+      });
+      this.onReset();
       console.log(this.form.value);
+    }
+    else
+    {
+      Swal.fire({
+        text:'קורס זה כבר קיים במערכת',
+        icon: 'error',
+        confirmButtonText: 'אישור'
+      });
+      return;
+    }
     }
 
     else
-      console.log("error");
+  Swal.fire({
+      text:'ת.ז. זו כבר קיימת במערכת',
+      icon: 'error',
+      confirmButtonText: 'אישור'
+    });
 
   }
 
