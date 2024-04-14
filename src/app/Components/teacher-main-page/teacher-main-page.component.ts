@@ -19,7 +19,9 @@ export class TeacherMainPageComponent {
   constructor(public funCourses:FunCourseService,public router:Router){  
   }
  
-  arrCourses=this.funCourses.getCoursesOfTeacher("8825484626")
+ arrCourses=this.funCourses.getCoursesByUser();
+
+  // arrCourses=this.funCourses.getCoursesOfTeacher("8825484626")
 
   // Disconnected(){//התנתק
   //   this.router.navigate(['/Home'])

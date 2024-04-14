@@ -3,6 +3,7 @@ import { StudentsService } from '../Students/students.service';
 import { Course } from '../../Models/Course'
 import { CoursesService } from '../Courses/courses.service';
 import { Lesson } from '../../Models/Lesson';
+import { UserService } from '../user/user.service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Lesson } from '../../Models/Lesson';
 })
 
 export class FunCourseService {
-  constructor(public course: CoursesService) { }
+  constructor(public course: CoursesService, private userGlobal: UserService) { }
 
   //פונקציעה שמחזירה את כל הקורסים
   //ללא כפילויות
@@ -76,19 +77,33 @@ export class FunCourseService {
     }
     return arrCourse
   }
-  // פונקציה שמקבלת idתלמיד ומחזירה את הקורסים שהוא לומד
-  //אם המתמש מנהל מחזירה את כל הקורסים שקיימים
-  getCoursesByUser(idUser: string) {
-    let arrCourse = []
-    if (idUser == "0000")
-      return this.getAllCourses();
+  
+ //פונקציה שמחזירה את כל הקורסים ששיכים למשתמש הנוכחי
+  getCoursesByUser() {
+    let user = this.userGlobal.user;
+    let arrCourse: Course[] = []
 
-    for (let i = 0; i < this.course.arrCourses.length; i++) {
-      if (this.course.arrCourses[i].IdStudent == idUser) {
-        arrCourse.push(this.course.arrCourses[i])
-      }
+    switch (user.Access) {
+      case 0:
+        return this.getAllCourses();
+      case 1:
+        {
+          for (let i of this.course.arrCourses) {
+            if (i.IdTeacher == user.Id)
+              arrCourse.push(i)
+          }
+          return arrCourse;
+        }
+      case 2:
+        {
+          for (let course of this.course.arrCourses)
+            if (course.IdStudent == user.Id)
+              arrCourse.push(course)
+          return arrCourse
+        }
+      default:
+        return arrCourse;
     }
-    return arrCourse
   }
 
   //פונקציה שנותנת את שם הקורס 

@@ -19,12 +19,12 @@ export class DisplayCoursesByUserComponent {
   }
 
 user=this.userGlobal.user;
-//לשנות בפונקציה אם זה מזהה מנהל להביא את כל הקורסיםVVV
-arrCour =this.funCourse.getCoursesByUser(this.user.Id);
+
+arrCour =this.funCourse.getCoursesByUser();
 
 //בפונקציה זו אם זה מזהה מנהל להביא את כמות השיעוריםVVV
 countListen(id_Cours:string){
- if(this.user.Id=="0000")
+ if(this.user.Access==0)
 return this.funCourse.GetCountLessonsForCourse(id_Cours);
  
   return this.funStudents.CountLessonStudentListen(id_Cours,this.user.Id)
