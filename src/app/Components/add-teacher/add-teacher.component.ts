@@ -30,14 +30,21 @@ import Swal from 'sweetalert2';
   styleUrl: './add-teacher.component.scss'
 })
 export class AddTeacherComponent {
+  someMethod(arg0: any) {
+    console.log(arg0);
+  }
+  foo(arg0: boolean) {
+
+  }
   form: FormGroup = new FormGroup({});
 
   submitted = false;
-  toppings = new FormControl('');
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  courses = new FormControl('');
+  coursesList: Course[] = [];
 
-
-  constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService) { }
+  constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService) {
+    this.coursesList = funCourses.getAllCourses();
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup(
@@ -90,33 +97,32 @@ export class AddTeacherComponent {
       IdStudent: ""
     }
     if (this.funTeacher.AddTeacher(newTeacher) == 200) {
-  
-    if(this.funCourses.addCourse(newCourse)==200)  
-   {   Swal.fire({
-        text: 'המשתמש נוסף בהצלחה',
-        icon: 'success',
-        confirmButtonText: 'אישור'
-      });
-      this.onReset();
-      console.log(this.form.value);
-    }
-    else
-    {
-      Swal.fire({
-        text:'קורס זה כבר קיים במערכת',
-        icon: 'error',
-        confirmButtonText: 'אישור'
-      });
-      return;
-    }
+
+      if (this.funCourses.addCourse(newCourse) == 200) {
+        Swal.fire({
+          text: 'המשתמש נוסף בהצלחה',
+          icon: 'success',
+          confirmButtonText: 'אישור'
+        });
+        this.onReset();
+        console.log(this.form.value);
+      }
+      else {
+        Swal.fire({
+          text: 'קורס זה כבר קיים במערכת',
+          icon: 'error',
+          confirmButtonText: 'אישור'
+        });
+        return;
+      }
     }
 
     else
-  Swal.fire({
-      text:'ת.ז. זו כבר קיימת במערכת',
-      icon: 'error',
-      confirmButtonText: 'אישור'
-    });
+      Swal.fire({
+        text: 'ת.ז. זו כבר קיימת במערכת',
+        icon: 'error',
+        confirmButtonText: 'אישור'
+      });
 
   }
 

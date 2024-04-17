@@ -67,8 +67,6 @@
     </div>
 
 
-
-
     <div class="form-group">
       <label>סיסמא</label>
       <input type="password" formControlName="password" class="form-control"
@@ -101,28 +99,12 @@
       }
     </div>
 
-
-    <!-- <div class="form-group form-check">
-        <input
-          type="checkbox"
-          formControlName="acceptTerms"
-          class="form-check-input"
-          [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
-        />
-        <label for="acceptTerms" class="form-check-label"
-          >I have read and agree to the Terms</label
-        >
-        @if (submitted && f['acceptTerms'].errors) {
-        <div class="invalid-feedback">Accept Terms is required</div>
-        }
-      </div> -->
-
       
       <mat-form-field>
-        <mat-label>Toppings</mat-label>
-        <mat-select [formControl]="toppings" multiple>
-          @for (topping of toppingList; track topping) {
-            <mat-option [value]="topping">{{topping}}</mat-option>
+        <mat-label>רשימת הקורסים</mat-label>
+        <mat-select (selectionChange)="someMethod($event.value)" [formControl]="courses" multiple>
+          @for (course of coursesList; track course) {
+            <mat-option  [value]="course.Name">{{course.Name}}</mat-option>
           }
         </mat-select>
       </mat-form-field>
