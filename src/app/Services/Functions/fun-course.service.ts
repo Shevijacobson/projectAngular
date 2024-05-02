@@ -77,8 +77,8 @@ export class FunCourseService {
     }
     return arrCourse
   }
-  
- //פונקציה שמחזירה את כל הקורסים ששיכים למשתמש הנוכחי
+
+  //פונקציה שמחזירה את כל הקורסים ששיכים למשתמש הנוכחי
   getCoursesByUser() {
     let user = this.userGlobal.user;
     let arrCourse: Course[] = []
@@ -88,9 +88,16 @@ export class FunCourseService {
         return this.getAllCourses();
       case 1:
         {
-          for (let i of this.course.arrCourses) {
-            if (i.IdTeacher == user.Id)
-              arrCourse.push(i)
+          for (let course of this.course.arrCourses) {
+            let flag = false
+            if (course.IdTeacher == user.Id){
+            for (let g = 0; g < arrCourse.length && flag == false; g++) {
+              if (course.Id == arrCourse[g].Id)
+                flag = true;
+            }
+            if (flag == false)
+              arrCourse.push(course)
+          }
           }
           return arrCourse;
         }

@@ -1,1 +1,28 @@
-<p>teachers-report works!</p>
+
+    <p class="pulse-button" >דוח מורות</p>
+
+  
+  <div class="col-lg-10 offset-lg-1"> 
+  <table class="table table-bordered" >
+  <thead>
+  <tr>
+  <th scope="col">עריכה</th>
+  <th scope="col"> הקורסים</th>
+    <th scope="col">שם המורה</th>
+  <th scope="col">ת.ז.</th>
+  </tr>
+  </thead>
+  
+  <tbody *ngFor="let teacher of teachers;let i=index">
+  <tr>
+  <th ><button class="btnMoreDetails" (click)="navigateToEditTeacher(teacher)">✏</button></th>
+  <td > <span *ngIf="teacher.courses.length==0">לא שובצו קורסים</span><ul><li class="li" *ngFor="let course of teacher.courses"> {{ course }} </li> </ul></td>
+
+  <td>{{teacher.FirstName}} {{teacher.LastName}}</td>
+  <td>{{teacher.Id}}</td>
+  </tr>
+  
+  </tbody>
+  </table>
+  </div>
+

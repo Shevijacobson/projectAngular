@@ -20,7 +20,8 @@ export const routes: Routes = [
             { path: 'managerAllCourses', component: DisplayCoursesByUserComponent },
             { path: 'CurrentCourse/:courseId', component: CurrentCourseComponent },
             { path: 'teachersReport', component: TeachersReportComponent },
-            { path: 'addTeacher', component: AddTeacherComponent }
+            { path: 'addTeacher', component: AddTeacherComponent },
+            { path: 'editTeacher', component: AddTeacherComponent },
         ]
     },
     { path: 'DisplayCourse/CurrentCourse/:courseId', component: CurrentCourseComponent },

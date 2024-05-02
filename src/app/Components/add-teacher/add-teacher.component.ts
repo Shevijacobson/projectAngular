@@ -22,6 +22,7 @@ import { FunCourseService } from '../../Services/Functions/fun-course.service';
 import { Course } from '../../Models/Course';
 import { CoursesService } from '../../Services/Courses/courses.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-teacher',
   standalone: true,
@@ -30,20 +31,26 @@ import Swal from 'sweetalert2';
   styleUrl: './add-teacher.component.scss'
 })
 export class AddTeacherComponent {
+  
   someMethod(arg0: any) {
     console.log(arg0);
   }
-  foo(arg0: boolean) {
 
-  }
   form: FormGroup = new FormGroup({});
 
   submitted = false;
   courses = new FormControl('');
   coursesList: Course[] = [];
+teacherToEdit={};
 
-  constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService) {
+  constructor(private funTeacher: FunTecherService, private funCourses: FunCourseService,private router:Router) {
+    
     this.coursesList = funCourses.getAllCourses();
+
+    const navigation = this.router.getCurrentNavigation();
+    this.teacherToEdit = navigation?.extras.state?.['teacherToEdit'];
+    console.log(this.router.url)
+   
   }
 
   ngOnInit(): void {
